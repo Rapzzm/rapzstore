@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiStore - Toko Digital Terpercaya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(180deg);
+        }
+
+        .home-btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .home-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .search-section {
+            background: #f8fafc;
+            padding: 2rem 0;
+        }
+
+        .search-container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: #a0aec0;
+        }
+
+        .filter-tags {
+            display: flex;
+            justify-content: flex-start;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            background: white;
+            border: 2px solid #e2e8f0;
+            color: #4a5568;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .filter-tag:hover {
+            border-color: #667eea;
+            background: #f7fafc;
+        }
+
+        .filter-tag.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-color: #667eea;
+            color: white;
+        }
+
+        .products {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #2d3748;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            background: #f7fafc;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .product-description {
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .product-price {
+            font-size: 1rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .buy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-size: 0.95rem;
+        }
+
+        .buy-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 450px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #718096;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .close:hover {
+            background: #f7fafc;
+            color: #2d3748;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #2d3748;
+            padding-right: 2rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .duration-options, .payment-options {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .option-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            border-color: #667eea;
+            background: #f7fafc;
+        }
+
+        .option-btn.selected {
+            border-color: #667eea;
+            background: #eef2ff;
+            color: #667eea;
+        }
+
+        .option-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .option-icon {
+            font-size: 1.2rem;
+        }
+
+        .option-price {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .final-buy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .final-buy-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .final-buy-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .info-section {
+            background: rgba(240, 245, 250, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 4rem 0;
+            border: 1px solid rgba(200, 210, 220, 0.6);
+            border-radius: 20px;
+            margin: 3rem 0;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-title {
+            text-align: left;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #2d3748;
+        }
+
+        .about-description {
+            max-width: 800px;
+            margin: 0 0 1.5rem 0;
+            text-align: left;
+            color: #4a5568;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .contact-section {
+            padding: 3rem 0 0 0;
+        }
+
+        .contact-title {
+            text-align: left;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #2d3748;
+        }
+
+        .contact-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact-item {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-info {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .secret-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .secret-btn {
+            background: #f7fafc;
+            color: #2d3748;
+            border: 2px solid #e2e8f0;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .secret-btn:hover {
+            transform: translateY(-2px);
+            background: #edf2f7;
+            border-color: #cbd5e0;
+        }
+
+        /* CSS Variables for Theme */
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --bg-card: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --border-color: #4a5568;
+            --shadow: rgba(0,0,0,0.3);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .search-section {
+            background: var(--bg-secondary);
+        }
+
+        .search-input {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .filter-tag {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .filter-tag:hover {
+            background: var(--bg-secondary);
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .product-name {
+            color: var(--text-primary);
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        .about-title, .contact-title {
+            color: var(--text-primary);
+        }
+
+        .about-description, .contact-info {
+            color: var(--text-secondary);
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .modal-title {
+            color: var(--text-primary);
+        }
+
+        .section-label {
+            color: var(--text-primary);
+        }
+
+        .option-btn {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .option-btn:hover {
+            background: var(--bg-primary);
+        }
+
+        .close {
+            color: var(--text-secondary);
+        }
+
+        .close:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .secret-btn {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .secret-btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .info-section {
+                padding: 3rem 0;
+                margin: 2rem 0;
+            }
+
+            .about-title, .contact-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .about-description {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .contact-section {
+                padding: 2rem 0 0 0;
+            }
+
+            .contact-item {
+                margin-bottom: 1rem;
+            }
+
+            .contact-icon {
+                font-size: 1.1rem;
+            }
+
+            .contact-info {
+                font-size: 0.9rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .product-card {
+                font-size: 0.9rem;
+            }
+            
+            .product-image {
+                height: 200px;
+            }
+            
+            .product-info {
+                padding: 1rem;
+            }
+            
+            .product-name {
+                font-size: 1rem;
+                margin-bottom: 0.4rem;
+            }
+            
+            .product-description {
+                font-size: 0.8rem;
+                margin-bottom: 0.8rem;
+                line-height: 1.4;
+            }
+            
+            .product-price {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .buy-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .modal-content {
+                margin: 10% 1rem;
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .theme-toggle {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">DigiStore</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">🌙</button>
+                <a href="#" class="home-btn">🏠 Home</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="🔍 Cari nama produk..." id="searchInput">
+                <div class="filter-tags">
+                    <button class="filter-tag active" onclick="filterProducts('all')">🏷️ Semua</button>
+                    <button class="filter-tag" onclick="filterProducts('desain')">🎨 Desain</button>
+                    <button class="filter-tag" onclick="filterProducts('musik')">🎵 Musik & Video</button>
+                    <button class="filter-tag" onclick="filterProducts('teknologi')">🔒 VPN</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products">
+        <div class="container">
+            <div class="product-grid">
+                <div class="product-card" data-category="desain">
+                    <img src="Canva_(5).png" alt="Canva Pro" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">Canva Pro</h3>
+                        <p class="product-description">Akses premium ke Canva Pro dengan fitur lengkap untuk desain grafis profesional. Ribuan template, elemen, dan font premium tersedia.</p>
+                        <div class="product-price">Mulai dari Rp 99.000</div>
+                        <button class="buy-btn" onclick="openModal('Canva Pro')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="desain">
+                    <img src="CC.png" alt="CapCut Pro" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">CapCut Pro</h3>
+                        <p class="product-description">Akses premium ke CapCut Pro untuk editing video profesional. Fitur lengkap tanpa watermark dan template premium tersedia.</p>
+                        <div class="product-price">Mulai dari Rp 99.000</div>
+                        <button class="buy-btn" onclick="openModal('CapCut Pro')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="musik">
+                    <img src="Netflix.jpg" alt="Netflix" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">Netflix</h3>
+                        <p class="product-description">Akses premium ke Netflix dengan ribuan film dan serial TV terbaru. Streaming berkualitas HD dan 4K tanpa iklan.</p>
+                        <div class="product-price">Mulai dari Rp 79.000</div>
+                        <button class="buy-btn" onclick="openModal('Netflix')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="musik">
+                    <img src="Am.jpg" alt="AlightMotion" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">AlightMotion</h3>
+                        <p class="product-description">Akses premium ke AlightMotion Pro untuk editing video dan animasi profesional. Fitur lengkap tanpa watermark dan efek premium tersedia.</p>
+                        <div class="product-price">Mulai dari Rp 10.000</div>
+                        <button class="buy-btn" onclick="openModal('AlightMotion')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="musik">
+                    <img src="viu.png" alt="Viu" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">Viu</h3>
+                        <p class="product-description">Akses premium ke Viu dengan ribuan drama Asia, film, dan konten eksklusif. Streaming berkualitas HD tanpa iklan.</p>
+                        <div class="product-price">Mulai dari Rp 89.000</div>
+                        <button class="buy-btn" onclick="openModal('Viu')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="musik">
+                    <img src="apmus.png" alt="Apple Music" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">Apple Music</h3>
+                        <p class="product-description">Akses premium ke Apple Music dengan jutaan lagu berkualitas tinggi. Streaming musik tanpa iklan dan download offline tersedia.</p>
+                        <div class="product-price">Mulai dari Rp 15.000</div>
+                        <button class="buy-btn" onclick="openModal('Apple Music')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="desain">
+                    <img src="Picsart.jpg" alt="Picsart" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">Picsart</h3>
+                        <p class="product-description">Akses premium ke Picsart dengan fitur editing foto dan video profesional. Template premium, stiker, dan efek tanpa watermark tersedia.</p>
+                        <div class="product-price">Mulai dari Rp 89.000</div>
+                        <button class="buy-btn" onclick="openModal('Picsart')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="musik">
+                    <img src="prime.jpg" alt="Prime Video" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">Prime Video</h3>
+                        <p class="product-description">Akses premium ke Amazon Prime Video dengan ribuan film dan serial TV eksklusif. Streaming berkualitas 4K tanpa iklan.</p>
+                        <div class="product-price">Mulai dari Rp 99.000</div>
+                        <button class="buy-btn" onclick="openModal('Prime Video')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="teknologi">
+                    <img src="hma.png" alt="HMA VPN" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">HMA VPN</h3>
+                        <p class="product-description">Akses premium ke HMA VPN untuk keamanan internet maksimal. Server global, kecepatan tinggi, dan perlindungan privasi terbaik.</p>
+                        <div class="product-price">Mulai dari Rp 149.000</div>
+                        <button class="buy-btn" onclick="openModal('HMA VPN')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="musik">
+                    <img src="spotify.png" alt="Spotify" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">Spotify</h3>
+                        <p class="product-description">Akses premium ke Spotify dengan jutaan lagu berkualitas tinggi. Streaming musik tanpa iklan, download offline, dan skip unlimited tersedia.</p>
+                        <div class="product-price">Mulai dari Rp 89.000</div>
+                        <button class="buy-btn" onclick="openModal('Spotify')">Beli Sekarang</button>
+                    </div>
+                </div>
+                
+                <div class="product-card" data-category="teknologi">
+                    <img src="exp.png" alt="Express VPN" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                    <div class="product-info">
+                        <h3 class="product-name">Express VPN</h3>
+                        <p class="product-description">Akses premium ke Express VPN untuk keamanan internet terdepan. Server global tercepat, enkripsi tingkat militer, dan perlindungan privasi maksimal.</p>
+                        <div class="product-price">Mulai dari Rp 179.000</div>
+                        <button class="buy-btn" onclick="openModal('Express VPN')">Beli Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="container">
+            <h2 class="about-title">Tentang Rapz Store</h2>
+            <p class="about-description">
+                Rapz Store adalah toko digital terpercaya yang menyediakan berbagai produk digital berkualitas tinggi untuk memenuhi kebutuhan bisnis dan kreatif Anda. Kami berkomitmen memberikan produk terbaik dengan harga terjangkau, mulai dari template website, design grafis, audio stock, hingga software tools yang dapat membantu mengembangkan bisnis Anda.
+            </p>
+            <p class="about-description">
+                Dengan pengalaman bertahun-tahun di industri digital, kami memahami kebutuhan pelanggan dan selalu menghadirkan produk-produk inovatif yang mengikuti perkembangan teknologi terkini. Kepuasan pelanggan adalah prioritas utama kami.
+            </p>
+            
+            <div class="contact-section">
+                <h2 class="contact-title">Kontak Kami</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-info">
+                            rapzxd25@gmail.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <img src="wa.png" alt="WhatsApp" style="width: 1.2rem; height: 1.2rem; object-fit: contain;" onerror="this.style.display='none'; this.parentElement.innerHTML='📞';">
+                        </div>
+                        <div class="contact-info">
+                            +62 838-5491-2766
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-info">
+                            Nganjuk, Jawa Timur, Indonesia
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="secret-section">
+                    <button class="secret-btn" onclick="openSecretItem()">
+                        Secret Item
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title" id="modalTitle">Beli Produk</h2>
+            
+            <div class="section">
+                <div class="section-label">Pilih Durasi Akses: <span style="color: #e53e3e;">*</span></div>
+                <div class="duration-options" id="durationOptions"></div>
+                <div class="error-message" id="durationError">Silakan pilih durasi akses</div>
+            </div>
+            
+            <div class="section">
+                <div class="section-label">Pilih Metode Pembayaran: <span style="color: #e53e3e;">*</span></div>
+                <div class="payment-options">
+                    <button class="option-btn" onclick="selectPayment('QRIS')">
+                        <div class="option-info">
+                            <span class="option-icon">📱</span>
+                            <span>QRIS</span>
+                        </div>
+                    </button>
+                    <button class="option-btn" onclick="selectPayment('GoPay')">
+                        <div class="option-info">
+                            <span class="option-icon">💚</span>
+                            <span>GoPay</span>
+                        </div>
+                    </button>
+                    <button class="option-btn" onclick="selectPayment('DANA')">
+                        <div class="option-info">
+                            <span class="option-icon">💙</span>
+                            <span>DANA</span>
+                        </div>
+                    </button>
+                    <button class="option-btn" onclick="selectPayment('ShopeePay')">
+                        <div class="option-info">
+                            <span class="option-icon">🧡</span>
+                            <span>ShopeePay</span>
+                        </div>
+                    </button>
+                    <button class="option-btn" onclick="selectPayment('SeaBank')">
+                        <div class="option-info">
+                            <span class="option-icon">🏦</span>
+                            <span>SeaBank</span>
+                        </div>
+                    </button>
+                </div>
+                <div class="error-message" id="paymentError">Silakan pilih metode pembayaran</div>
+            </div>
+            
+            <button class="final-buy-btn" id="finalBuyBtn" onclick="processPurchase()" disabled>
+                Beli Sekarang
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const sellerWhatsApp = "6281234567890";
+        let selectedProduct = '';
+        let selectedDuration = null;
+        let selectedPayment = '';
+
+        // Theme functionality
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+            }
+        }
+
+        // Initialize theme when page loads
+        window.addEventListener('load', function() {
+            initTheme();
+        });
+
+        const productData = {
+            'Canva Pro': [
+                { duration: '1 Bulan', price: 5000 },
+                { duration: '6 Bulan', price: 20000 },
+                { duration: '1 Tahun', price: 30000 },
+                { duration: 'Admin Tim', price: 10000 },
+                { duration: 'Akun Canva Owner', price: 10000 }
+            ],
+            'CapCut Pro': [
+                { duration: '1 Hari', price: 99000 },
+                { duration: '1 Minggu', price: 199000 },
+                { duration: 'Permanen', price: 299000 }
+            ],
+            'Netflix': [
+                { duration: '1 Hari', price: 79000 },
+                { duration: '1 Minggu', price: 149000 },
+                { duration: 'Permanen', price: 199000 }
+            ],
+            'AlightMotion': [
+                { duration: '1 Tahun', price: 10000 }
+            ],
+            'Viu': [
+                { duration: '1 Hari', price: 89000 },
+                { duration: '1 Minggu', price: 169000 },
+                { duration: 'Permanen', price: 249000 }
+            ],
+            'Apple Music': [
+                { duration: 'Appmus Famhead 30 Hari', price: 15000 },
+                { duration: 'Appmus Famplan 30 Hari', price: 15000 }
+            ],
+            'Picsart': [
+                { duration: '1 Hari', price: 89000 },
+                { duration: '1 Minggu', price: 169000 },
+                { duration: 'Permanen', price: 249000 }
+            ],
+            'Prime Video': [
+                { duration: '1 Hari', price: 99000 },
+                { duration: '1 Minggu', price: 189000 },
+                { duration: 'Permanen', price: 279000 }
+            ],
+            'HMA VPN': [
+                { duration: '1 Hari', price: 149000 },
+                { duration: '1 Minggu', price: 299000 },
+                { duration: 'Permanen', price: 449000 }
+            ],
+            'Spotify': [
+                { duration: '1 Hari', price: 89000 },
+                { duration: '1 Minggu', price: 159000 },
+                { duration: 'Permanen', price: 229000 }
+            ],
+            'Express VPN': [
+                { duration: '1 Hari', price: 179000 },
+                { duration: '1 Minggu', price: 349000 },
+                { duration: 'Permanen', price: 499000 }
+            ]
+        };
+
+        function openModal(productName) {
+            selectedProduct = productName;
+            selectedDuration = null;
+            selectedPayment = '';
+            
+            document.getElementById('modalTitle').textContent = 'Beli ' + productName;
+            document.getElementById('purchaseModal').style.display = 'block';
+            
+            const durationOptions = document.getElementById('durationOptions');
+            durationOptions.innerHTML = '';
+            
+            const options = productData[productName];
+            options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.onclick = () => selectDuration(index);
+                
+                const icon = option.duration === '1 Hari' ? '⏰' : option.duration === '1 Minggu' ? '📅' : '♾️';
+                button.innerHTML = `
+                    <div class="option-info">
+                        <span class="option-icon">${icon}</span>
+                        <span>${option.duration}</span>
+                    </div>
+                    <span class="option-price">Rp ${option.price.toLocaleString('id-ID')}</span>
+                `;
+                durationOptions.appendChild(button);
+            });
+            
+            resetSelections();
+            updateBuyButton();
+        }
+
+        function closeModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
+
+        function selectDuration(index) {
+            selectedDuration = index;
+            
+            document.querySelectorAll('#durationOptions .option-btn').forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            });
+            
+            document.getElementById('durationError').style.display = 'none';
+            updateBuyButton();
+        }
+
+        function selectPayment(method) {
+            selectedPayment = method;
+            
+            document.querySelectorAll('.payment-options .option-btn').forEach(btn => {
+                const methodName = btn.querySelector('span:last-child').textContent;
+                if (methodName === method) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            });
+            
+            document.getElementById('paymentError').style.display = 'none';
+            updateBuyButton();
+        }
+
+        function updateBuyButton() {
+            const finalBuyBtn = document.getElementById('finalBuyBtn');
+            const isValid = selectedDuration !== null && selectedPayment !== '';
+            
+            finalBuyBtn.disabled = !isValid;
+            
+            if (isValid) {
+                const selectedOption = productData[selectedProduct][selectedDuration];
+                finalBuyBtn.textContent = `Beli Sekarang - Rp ${selectedOption.price.toLocaleString('id-ID')}`;
+            } else {
+                finalBuyBtn.textContent = 'Beli Sekarang';
+            }
+        }
+
+        function resetSelections() {
+            document.querySelectorAll('#durationOptions .option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('.payment-options .option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            
+            document.getElementById('durationError').style.display = 'none';
+            document.getElementById('paymentError').style.display = 'none';
+        }
+
+        function processPurchase() {
+            let hasError = false;
+            
+            if (selectedDuration === null) {
+                document.getElementById('durationError').style.display = 'block';
+                hasError = true;
+            }
+            
+            if (selectedPayment === '') {
+                document.getElementById('paymentError').style.display = 'block';
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
+            const selectedOption = productData[selectedProduct][selectedDuration];
+            
+            const message = `*PESANAN BARU*
+
+*Produk:* ${selectedProduct}
+*Durasi:* ${selectedOption.duration}
+*Harga:* Rp ${selectedOption.price.toLocaleString('id-ID')}
+*Metode Pembayaran:* ${selectedPayment}
+
+Mohon konfirmasi pesanan dan kirimkan detail pembayaran ${selectedPayment}. Terima kasih!`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${sellerWhatsApp}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+            closeModal();
+            
+            setTimeout(() => {
+                alert('Anda akan diarahkan ke WhatsApp untuk menyelesaikan pembelian!');
+            }, 500);
+        }
+
+        // Filter functionality
+        function filterProducts(category) {
+            const productCards = document.querySelectorAll('.product-card');
+            const filterTags = document.querySelectorAll('.filter-tag');
+            
+            // Update active tag
+            filterTags.forEach(tag => tag.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter products
+            productCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                const productName = card.querySelector('.product-name').textContent.toLowerCase();
+                const productDescription = card.querySelector('.product-description').textContent.toLowerCase();
+                
+                if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Secret item function
+        function openSecretItem() {
+            // Ganti URL ini dengan website yang diinginkan
+            const secretURL = "https://www.google.com";
+            window.open(secretURL, '_blank');
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cea0d4a184fe23',t:'MTc1NzUwNDE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
