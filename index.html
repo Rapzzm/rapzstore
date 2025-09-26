@@ -731,7 +731,7 @@
             }
 
             .product-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, fr);
                 gap: 1rem;
             }
             
@@ -911,9 +911,10 @@
                         <div class="product-price">Mulai dari Rp 15.000</div>
                         <button class="buy-btn" onclick="openModal('Express VPN')">Beli Sekarang</button>
                     </div>
-
-                <div class="product-card" data-category="desain">
-                    <img src="loklok.jpg" alt="Picsart" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                </div>
+                <!-- Produk Loklok dipindahkan ke sini agar berada di samping Express VPN -->
+                <div class="product-card" data-category="musik">
+                    <img src="loklok.jpg" alt="Loklok" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">LokLok</h3>
                         <p class="product-description">Akses premium ke LokLok dengan Streaming video profesional. 4K HD+ tanpa iklan watermark.</p>
@@ -1356,6 +1357,3 @@
     
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cea0d4a184fe23',t:'MTc1NzUwNDE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
