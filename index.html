@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiStore - Toko Digital Terpercaya</title>
+    <title>RapzStore - Toko APK Premium Trusted</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -123,6 +123,145 @@
             color: #a0aec0;
         }
 
+/* --- Testimonial Section --- */
+.testimonial-section {
+    padding: 2rem 0;
+    background: var(--bg-secondary);
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.testimonial-section .section-title {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.slideshow-container {
+    max-width: 300px; /* Lebar untuk ukuran kecil (9:16) */
+    position: relative;
+    margin: 0 auto 1rem auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--shadow);
+    background: var(--bg-card);
+    user-select: none; /* Cegah seleksi teks saat swipe */
+}
+
+.mySlides {
+    display: none;
+    cursor: pointer; /* Pointer untuk klik lightbox */
+    touch-action: pan-y; /* Izinkan swipe horizontal di mobile */
+}
+
+.mySlides img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 9 / 16;
+    transition: transform 0.3s ease;
+    user-select: none; /* Cegah drag gambar default */
+}
+
+.mySlides img:hover {
+    transform: scale(1.02);
+}
+
+/* Dots (tetap ada) */
+.dot {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 3px;
+    background-color: var(--text-secondary);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #667eea;
+}
+
+/* Animasi fade (tetap sama) */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+/* --- Lightbox Modal (tetap sama) --- */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Responsif (tetap sama) */
+@media (max-width: 768px) {
+    .testimonial-section {
+        padding: 1.5rem 0;
+    }
+    .testimonial-section .section-title {
+        font-size: 1.5rem;
+    }
+    .slideshow-container {
+        max-width: 250px;
+        margin-bottom: 0.8rem;
+    }
+    .dot {
+        height: 10px;
+        width: 10px;
+    }
+    .lightbox-content {
+        width: 95%;
+    }
+    .lightbox-close {
+        font-size: 30px;
+        top: 10px;
+        right: 20px;
+    }
+}
 
 
         .products {
@@ -550,6 +689,16 @@
         }
 
         @media (max-width: 768px) {
+            .title-box {
+               padding: 0.8rem 1.5rem; /* Perkecil padding di mobile */
+                 margin-bottom: 1.5rem;
+                  box-shadow: 0 1px 4px var(--shadow); /* Shadow lebih ringan di mobile */
+             }
+    
+          .testimonial-section .section-title {
+          font-size: 1.5rem; /* Perkecil font di mobile */
+           }
+
             .info-section {
                 padding: 3rem 0;
                 margin: 2rem 0;
@@ -651,8 +800,6 @@
         </nav>
     </header>
 
-
-
     <section class="products">
         <div class="container">
             <div class="product-grid">
@@ -660,7 +807,7 @@
                     <img src="Canva_(5).png" alt="Canva Pro" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">Canva Pro</h3>
-                        <p class="product-description">Akses premium Canva Pro editor video & animasi profesional, tanpa watermark.</p>
+                        <p class="product-description">Akses premium Canva Pro Editing video, Foto & Element profesional, tanpa watermark.</p>
                         <div class="product-price">Mulai dari Rp 99.000</div>
                         <button class="buy-btn" onclick="openModal('Canva Pro')">Beli Sekarang</button>
                     </div>
@@ -670,7 +817,7 @@
                     <img src="CC.png" alt="CapCut Pro" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">CapCut Pro</h3>
-                        <p class="product-description">Akses premium Capcut Pro editor video & animasi profesional, tanpa watermark.</p>
+                        <p class="product-description">Akses premium CapCut Pro Editor video klip profesional, tanpa iklan & watermark.</p>
                        <div class="product-price">Mulai dari Rp 99.000</div>
                         <button class="buy-btn" onclick="openModal('CapCut Pro')">Beli Sekarang</button>
                     </div>
@@ -680,8 +827,8 @@
                     <img src="Netflix.jpg" alt="Netflix" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">Netflix</h3>
-                        <p class="product-description">Akses premium Netflix Premium video & animasi profesional, tanpa watermark.</p>
-                       <div class="product-price">Mulai dari Rp 79.000</div>
+                        <p class="product-description">Akses premium Netflix Premium Streaming Film kualitas HD 4K, tanpa iklan.</p>
+                       <div class="product-price">Mulai dari Rp20.000</div>
                         <button class="buy-btn" onclick="openModal('Netflix')">Beli Sekarang</button>
                     </div>
                 </div>
@@ -768,6 +915,40 @@
             </div>
         </div>
     </section>
+
+    <section class="testimonial-section">
+        <h2 class="section-title">Testimoni Pelanggan</h2>
+        <div class="slideshow-container">
+            <!-- Slide 1: Placeholder gambar vertikal (rasio 9:16) -->
+            <div class="mySlides fade">
+                <img src="testimoni1.jpg" alt="Testimoni Pelanggan 1" onclick="openLightbox(this.src)">
+            </div>
+        
+            <!-- Slide 2: Placeholder lain -->
+            <div class="mySlides fade">
+                <img src="testimoni2.jpg" alt="Testimoni Pelanggan 2" onclick="openLightbox(this.src)">
+            </div>
+        
+            <!-- Slide 3: Placeholder lain (atau hapus jika hanya 2 foto) -->
+            <div class="mySlides fade">
+                <img src="testimoni3.jpg" alt="Testimoni Pelanggan 3" onclick="openLightbox(this.src)">
+            </div>
+        
+            <!-- Dots untuk navigasi manual -->
+            <div style="text-align:center; margin-top: 1rem;">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <!-- Tambah/hapus dot sesuai jumlah foto -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lightbox untuk Perbesar Gambar -->
+    <div id="lightboxModal" class="lightbox-modal">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img class="lightbox-content" id="img01">
+    </div>
 
     <section class="info-section">
         <div class="container">
@@ -899,7 +1080,46 @@
         // Initialize theme when page loads
         window.addEventListener('load', function() {
             initTheme();
+            showSlides(); // Start the slideshow
         });
+
+        // Slideshow functionality
+        let slideIndex = 0;
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        // Lightbox functionality
+        function openLightbox(src) {
+            document.getElementById("lightboxModal").style.display = "block";
+            document.getElementById("img01").src = src;
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightboxModal").style.display = "none";
+        }
+
 
         const productData = {
             'Canva Pro': [
@@ -1074,7 +1294,7 @@
     
     window.location.href = paymentURL; // Atau window.open(paymentURL, '_blank'); jika ingin buka tab baru
     closeModal();
-    
+
             setTimeout(() => {
                 alert('Anda akan diarahkan ke WhatsApp untuk menyelesaikan pembelian!');
             }, 500);
@@ -1131,6 +1351,6 @@
             window.open(secretURL, '_blank');
         }
     </script>
+    
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cea0d4a184fe23',t:'MTc1NzUwNDE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
