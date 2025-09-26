@@ -154,7 +154,17 @@
             display: none;
         }
 
-        /* CSS Variables for Theme (copy dari index.html) */
+        .logo-fallback {
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* CSS Variables for Theme */
         :root {
             --bg-primary: #1a202c;
             --bg-secondary: #2d3748;
@@ -265,26 +275,26 @@
     <script>
         const sellerWhatsApp = "6283854912766"; // Nomor WA penjual (sama seperti index.html)
 
-        // Data nomor pembayaran (ganti dengan nomor asli Anda)
+        // Data nomor pembayaran (ganti dengan nomor asli Anda) - PATH RELATIVE (tanpa / di depan)
         const paymentDetails = {
             QRIS: {
-                logo: '/main/bank/qris2.png', // Khusus QRIS: Gunakan qris2.png di payment.html (beda dari qris.png di index.html)
+                logo: 'bank/qris2.png', // Relative path untuk GitHub
                 detail: 'Scan QRIS di atas dan transfer sesuai nominal pesanan.'
             },
             GoPay: {
-                logo: '/bank/gopay.png',
+                logo: 'bank/gopay.png',
                 detail: 'GoPay: 081234567890 (Nama: Rapz Store)'
             },
             DANA: {
-                logo: '/bank/dana.png',
+                logo: 'bank/dana.png',
                 detail: 'DANA: 081234567890 (Nama: Rapz Store)'
             },
             ShopeePay: {
-                logo: '/bank/shopeepay.png',
+                logo: 'bank/shopeepay.png',
                 detail: 'ShopeePay: 081234567890 (Nama: Rapz Store)'
             },
             SeaBank: {
-                logo: '/bank/seabank.png',
+                logo: 'bank/seabank.png',
                 detail: 'SeaBank: 1234567890 (Nama: Rapz Store)'
             }
         };
@@ -321,18 +331,26 @@
             if (payment) {
                 const logoDiv = document.getElementById('paymentLogo');
                 const logoPath = payment.logo;
+                
+                // DEBUG: Log path ke console untuk cek
+                console.log('Loading logo path:', logoPath);
+                console.log('Full URL (untuk test):', window.location.origin + '/' + logoPath);
+                
                 const isQRIS = params.payment === 'QRIS';
                 const imgClass = isQRIS ? 'payment-logo-img qris-logo' : 'payment-logo-img';
                 
                 // Fallback SVG disesuaikan ukuran berdasarkan QRIS atau tidak
                 let fallbackSVG = '';
+                let fallbackText = '';
                 if (isQRIS) {
                     fallbackSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlFSSVM8L3RleHQ+PC9zdmc+';
+                    fallbackText = 'Gambar QRIS tidak ditemukan. <a href="https://github.com/username/nama-repo/tree/main/bank" target="_blank">Cek folder bank di GitHub</a>';
                 } else {
                     fallbackSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxvZ288L3RleHQ+PC9zdmc+';
+                    fallbackText = 'Gambar logo tidak ditemukan. <a href="https://github.com/username/nama-repo/tree/main/bank" target="_blank">Cek folder bank di GitHub</a>';
                 }
                 
-                logoDiv.innerHTML = `<img src="${logoPath}" alt="Logo ${params.payment}" class="${imgClass}" onerror="this.src='${fallbackSVG}'; this.alt='Logo Placeholder';">`;
+                logoDiv.innerHTML = `<img src="${logoPath}" alt="Logo ${params.payment}" class="${imgClass}" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<div class=\\"logo-fallback\\">${fallbackText}</div>\'; console.error(\'Gambar gagal load: \', this.src);">`;
                 
                 document.getElementById('paymentDetails').textContent = payment.detail;
             } else {
@@ -349,31 +367,4 @@
             const params = getQueryParams();
             const message = `*KONFIRMASI TRANSFER*
 
-*Produk:* ${params.product}
-*Durasi:* ${params.duration}
-*Harga:* Rp ${parseInt(params.price).toLocaleString('id-ID')}
-*Metode Pembayaran:* ${params.payment}
-
-Saya sudah transfer ke ${params.payment}. Mohon cek bukti transfer yang saya lampirkan. Terima kasih!`;
-            
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/${sellerWhatsApp}?text=${encodedMessage}`;
-            
-            window.open(whatsappURL, '_blank');
-        }
-
-        // Inisialisasi theme (copy dari index.html untuk konsistensi)
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.setAttribute('data-theme', savedTheme);
-        }
-
-        // Jalankan saat halaman load
-        window.addEventListener('load', function() {
-            initTheme();
-            initPage();
-        });
-    </script>
-</body>
-</html>
-
+*Produk:*
