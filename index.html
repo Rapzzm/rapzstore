@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RapzStore - Toko Digital Terpercaya</title>
+    <title>DigiStore - Toko Digital Terpercaya</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -123,36 +123,7 @@
             color: #a0aec0;
         }
 
-        .filter-tags {
-            display: flex;
-            justify-content: flex-start;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
 
-        .filter-tag {
-            background: white;
-            border: 2px solid #e2e8f0;
-            color: #4a5568;
-            padding: 0.5rem 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .filter-tag:hover {
-            border-color: #ea6666;
-            background: #f7fafc;
-        }
-
-        .filter-tag.active {
-            background: linear-gradient(135deg, #ea668e 0%, #4ba27e 100%);
-            border-color: #667eea;
-            color: white;
-        }
 
         .products {
             padding: 3rem 0;
@@ -168,12 +139,11 @@
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
         }
 
         .product-card {
-            background: white;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -190,8 +160,8 @@
         }
 
         .product-image {
-            width: 100%;
-            height: 280px;
+            width: auto;
+            height: auto;
             object-fit: auto;
         }
 
@@ -233,7 +203,7 @@
             cursor: pointer;
             transition: all 0.3s;
             width: 100%;
-            font-size: 0.95rem;
+            font-size: 1px;
         }
 
         .buy-btn:hover {
@@ -507,15 +477,7 @@
             color: var(--text-secondary);
         }
 
-        .filter-tag {
-            background: var(--bg-card);
-            border-color: var(--border-color);
-            color: var(--text-secondary);
-        }
 
-        .filter-tag:hover {
-            background: var(--bg-secondary);
-        }
 
         .product-card {
             background: var(--bg-card);
@@ -620,7 +582,7 @@
             }
 
             .product-grid {
-                grid-template-columns: repeat(4, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
             
@@ -629,8 +591,8 @@
             }
             
             .product-image {
-                height: 135px;
-                width: 145px;
+                height: auto;
+                width: auto;
             }
             
             .product-info {
@@ -641,12 +603,14 @@
                 font-size: 1.2rem;
                 text-align: center;
                 margin-bottom: 0.4rem;
+                line-height: 1.20;
             }
             
             .product-description {
-                font-size: 0.7rem;
+            text-align: justify;
+                font-size: 0.6rem;
                 margin-bottom: 1rem;
-                line-height: 1.35;
+                line-height: 1.30;
             }
             
             .product-price {
@@ -656,7 +620,7 @@
             
             .buy-btn {
                 padding: 0.5rem 1rem;
-                font-size: 0.70rem;
+                font-size: 0.5rem;
             }
             
             .modal-content {
@@ -676,7 +640,7 @@
         }
     </style>
 </head>
-<body data-theme="light">
+<body data-theme="dark">
     <header>
         <nav class="container">
             <a href="#" class="logo">RapzStore</a>
@@ -687,19 +651,7 @@
         </nav>
     </header>
 
-    <section class="search-section">
-        <div class="container">
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="🔍 Cari nama produk..." id="searchInput">
-                <div class="filter-tags">
-                    <button class="filter-tag active" onclick="filterProducts('all')">🏷️ Semua</button>
-                    <button class="filter-tag" onclick="filterProducts('desain')">🎨 Desain</button>
-                    <button class="filter-tag" onclick="filterProducts('musik')">🎵 Musik & Video</button>
-                    <button class="filter-tag" onclick="filterProducts('teknologi')">🔒 VPN</button>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <section class="products">
         <div class="container">
@@ -708,8 +660,7 @@
                     <img src="Canva_(5).png" alt="Canva Pro" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">Canva Pro</h3>
-                        <p class="product-description">Akses ke Canva Pro dengan fitur lengkap desain grafis profesional. Ribuan template, elemen, dan font PRO tersedia.</p>
-                         <div class="product-price">Mulai dari Rp 99.000</div>
+                        <div class="product-price">Mulai dari Rp 99.000</div>
                         <button class="buy-btn" onclick="openModal('Canva Pro')">Beli Sekarang</button>
                     </div>
                 </div>
@@ -718,8 +669,7 @@
                     <img src="CC.png" alt="CapCut Pro" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">CapCut Pro</h3>
-                        <p class="product-description">Akses ke CapCut Pro APK editor profesional. Lengkap tanpa watermark dan semua template premium.</p>
-                        <div class="product-price">Mulai dari Rp 99.000</div>
+                       <div class="product-price">Mulai dari Rp 99.000</div>
                         <button class="buy-btn" onclick="openModal('CapCut Pro')">Beli Sekarang</button>
                     </div>
                 </div>
@@ -728,8 +678,7 @@
                     <img src="Netflix.jpg" alt="Netflix" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">Netflix</h3>
-                        <p class="product-description">Akses ke Netflix Premium. Streaming ribuan Film berkualitas HD dan 4K tanpa iklan.</p>
-                        <div class="product-price">Mulai dari Rp 79.000</div>
+                       <div class="product-price">Mulai dari Rp 79.000</div>
                         <button class="buy-btn" onclick="openModal('Netflix')">Beli Sekarang</button>
                     </div>
                 </div>
@@ -737,7 +686,7 @@
                 <div class="product-card" data-category="musik">
                     <img src="Am.jpg" alt="AlightMotion" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
-                        <h3 class="product-name">AlightMotion</h3>
+                        <h3 class="product-name">Alight Motion</h3>
                         <p class="product-description">Akses premium AlightMotion Pro editor video & animasi profesional, tanpa watermark.</p>
                         <div class="product-price">Mulai dari Rp 10.000</div>
                         <button class="buy-btn" onclick="openModal('AlightMotion')">Beli Sekarang</button>
@@ -1185,4 +1134,3 @@ Mohon konfirmasi Pesanan Saya Min, Kirim ${selectedPayment} ya saya mau transfer
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cea0d4a184fe23',t:'MTc1NzUwNDE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
