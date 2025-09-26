@@ -15,8 +15,8 @@
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: #f8fafc;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             transition: all 0.3s ease;
         }
 
@@ -32,32 +32,65 @@
             -webkit-backdrop-filter: blur(20px);
             color: white;
             padding: 1rem 0;
-            box-shadow: 0 9px 19px rgba(0,0,0,0.1);
+            box-shadow: 0 9px 19px var(--shadow);
             text-align: center;
             margin-bottom: 2rem;
         }
 
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .logo {
-            font-size: 1.8rem;
+            font-size: 1rem;
             font-weight: 700;
             text-decoration: none;
             color: white;
         }
 
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(180deg);
+        }
+
         .summary-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px var(--shadow);
+            border: 1px solid var(--border-color);
         }
 
         .summary-title {
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #2d3748;
+            color: var(--text-primary);
         }
 
         .summary-item {
@@ -65,33 +98,38 @@
             justify-content: space-between;
             margin-bottom: 0.5rem;
             padding: 0.5rem 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .summary-label {
             font-weight: 500;
-            color: #4a5568;
+            color: var(--text-secondary);
         }
 
         .summary-value {
             font-weight: 600;
-            color: #2d3748;
+            color: var(--text-primary);
+        }
+
+        /* Style khusus untuk elemen harga agar berwarna merah dengan kontras di kedua tema */
+        #price {
+            color: var(--price-color);
         }
 
         .payment-info {
-            background: #f8fafc;
+            background: var(--bg-secondary);
             border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px var(--shadow);
+            border: 1px solid var(--border-color);
         }
 
         .payment-title {
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #2d3748;
+            color: var(--text-primary);
             text-align: center;
         }
 
@@ -112,17 +150,18 @@
         .qris-logo {
             width: 250px !important;
             height: 250px !important;
-            max-width: 100%; /* Agar responsive di container kecil */
+            max-width: 100%;
         }
 
         .payment-details {
-            background: white;
+            background: var(--bg-card);
             padding: 1rem;
             border-radius: 8px;
             text-align: center;
             font-weight: 600;
-            color: #2d3748;
+            color: var(--text-primary);
             word-break: break-all;
+            border: 1px solid var(--border-color);
         }
 
         .upload-btn {
@@ -145,8 +184,9 @@
         }
 
         .error-message {
-            background: #fed7d7;
-            color: #c53030;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
             padding: 1rem;
             border-radius: 8px;
             text-align: center;
@@ -154,17 +194,12 @@
             display: none;
         }
 
-        .logo-fallback {
-            background: #f0f0f0;
-            border: 2px dashed #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            color: #999;
-            font-size: 0.9rem;
+        .error-message a {
+            color: var(--text-primary);
+            text-decoration: underline;
         }
 
-        /* CSS Variables for Theme */
+        /* CSS Variables for Theme (copy persis dari index.html) - Ditambahkan --price-color untuk harga merah kontras */
         :root {
             --bg-primary: #1a202c;
             --bg-secondary: #2d3748;
@@ -173,6 +208,7 @@
             --text-secondary: #cbd5e0;
             --border-color: #4a5568;
             --shadow: rgba(0,0,0,0.3);
+            --price-color: #ef4444; /* Merah gelap untuk light mode (kontras dengan background terang) */
         }
 
         [data-theme="dark"] {
@@ -183,29 +219,7 @@
             --text-secondary: #718096;
             --border-color: #e2e8f0;
             --shadow: rgba(0,0,0,0.1);
-        }
-
-        body {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-        }
-
-        .summary-card, .payment-info {
-            background: var(--bg-card);
-            border-color: var(--border-color);
-            box-shadow: 0 9px 12px var(--shadow);
-        }
-
-        .summary-title, .payment-title {
-            color: var(--text-primary);
-        }
-
-        .summary-label {
-            color: var(--text-secondary);
-        }
-
-        .summary-value, .payment-details {
-            color: var(--text-primary);
+            --price-color: #f87171; /* Merah lebih terang untuk dark mode (kontras dengan background gelap) */
         }
 
         @media (max-width: 768px) {
@@ -223,17 +237,31 @@
                 height: 100px;
             }
             
-            /* Ukuran QRIS di mobile: Masih besar tapi fit di layar */
             .qris-logo {
                 width: 180px !important;
                 height: 180px !important;
             }
+
+            .nav-buttons {
+                gap: 0.5rem;
+            }
+
+            .theme-toggle {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
-<body data-theme="dark">
+<body data-theme="light">
     <header>
-        <a href="index.html" class="logo">← Kembali ke RapzStore</a>
+        <nav class="container">
+            <a href="index.html" class="logo">← Kembali ke RapzStore</a>
+            <div class="nav-buttons">
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">🌙</button>
+            </div>
+        </nav>
     </header>
 
     <div class="container">
@@ -264,7 +292,7 @@
                 <h3 class="payment-title">Silakan Lakukan Transfer</h3>
                 <div class="payment-logo" id="paymentLogo"></div>
                 <div class="payment-details" id="paymentDetails"></div>
-                <p style="text-align: center; margin-top: 1rem; color: #4a5568; font-size: 0.9rem;">
+                <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
                     Setelah transfer, klik tombol di bawah untuk kirim bukti via WhatsApp.
                 </p>
                 <button class="upload-btn" onclick="sendProof()">Kirim Bukti Transfer</button>
@@ -273,31 +301,54 @@
     </div>
 
     <script>
-        const sellerWhatsApp = "6283854912766"; // Nomor WA penjual (sama seperti index.html)
+        const sellerWhatsApp = "6283854912766";
 
-        // Data nomor pembayaran (ganti dengan nomor asli Anda) - PATH RELATIVE (tanpa / di depan)
+        // Data nomor pembayaran (path absolut seperti kode asli Anda)
         const paymentDetails = {
             QRIS: {
-                logo: 'bank/qris2.png', // Relative path untuk GitHub
+                logo: '/bank/qris2.png',
                 detail: 'Scan QRIS di atas dan transfer sesuai nominal pesanan.'
             },
             GoPay: {
-                logo: 'bank/gopay.png',
-                detail: 'GoPay: 081234567890 (Nama: Rapz Store)'
+                logo: '/bank/gopay.png',
+                detail: 'GoPay: 082131167086 (Nama: Rapz Store)'
             },
             DANA: {
                 logo: '/bank/dana.png',
-                detail: 'DANA: 081234567890 (Nama: Rapz Store)'
+                detail: 'DANA: 082131167086 (Nama: RAFIF IL** P** R**)'
             },
             ShopeePay: {
-                logo: 'bank/shopeepay.png',
-                detail: 'ShopeePay: 081234567890 (Nama: Rapz Store)'
+                logo: '/bank/shopeepay.png',
+                detail: 'ShopeePay: 082131167086 (Nama: Rapz Store)'
             },
             SeaBank: {
-                logo: 'bank/seabank.png',
-                detail: 'SeaBank: 1234567890 (Nama: Rapz Store)'
+                logo: '/bank/seabank.png',
+                detail: 'SeaBank: 1234567890 (Nama: RAFIF IL** P** R**)'
             }
         };
+
+        // Theme functionality (copy persis dari index.html)
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
+            }
+        }
 
         // Parse query parameters dari URL
         function getQueryParams() {
@@ -331,26 +382,18 @@
             if (payment) {
                 const logoDiv = document.getElementById('paymentLogo');
                 const logoPath = payment.logo;
-                
-                // DEBUG: Log path ke console untuk cek
-                console.log('Loading logo path:', logoPath);
-                console.log('Full URL (untuk test):', window.location.origin + '/' + logoPath);
-                
                 const isQRIS = params.payment === 'QRIS';
                 const imgClass = isQRIS ? 'payment-logo-img qris-logo' : 'payment-logo-img';
                 
                 // Fallback SVG disesuaikan ukuran berdasarkan QRIS atau tidak
                 let fallbackSVG = '';
-                let fallbackText = '';
                 if (isQRIS) {
                     fallbackSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlFSSVM8L3RleHQ+PC9zdmc+';
-                    fallbackText = 'Gambar QRIS tidak ditemukan. <a href="https://github.com/username/nama-repo/tree/main/bank" target="_blank">Cek folder bank di GitHub</a>';
                 } else {
                     fallbackSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxvZ288L3RleHQ+PC9zdmc+';
-                    fallbackText = 'Gambar logo tidak ditemukan. <a href="https://github.com/username/nama-repo/tree/main/bank" target="_blank">Cek folder bank di GitHub</a>';
                 }
                 
-                logoDiv.innerHTML = `<img src="${logoPath}" alt="Logo ${params.payment}" class="${imgClass}" onerror="this.style.display=\'none\'; this.parentElement.innerHTML=\'<div class=\\"logo-fallback\\">${fallbackText}</div>\'; console.error(\'Gambar gagal load: \', this.src);">`;
+                logoDiv.innerHTML = `<img src="${logoPath}" alt="Logo ${params.payment}" class="${imgClass}" onerror="this.src='${fallbackSVG}'; this.alt='Logo Placeholder';">`;
                 
                 document.getElementById('paymentDetails').textContent = payment.detail;
             } else {
@@ -367,5 +410,24 @@
             const params = getQueryParams();
             const message = `*KONFIRMASI TRANSFER*
 
-*Produk:*
+*Produk:* ${params.product}
+*Durasi:* ${params.duration}
+*Harga:* Rp ${parseInt(params.price).toLocaleString('id-ID')}
+*Metode Pembayaran:* ${params.payment}
 
+Saya sudah transfer ke ${params.payment}. Mohon cek bukti transfer yang saya lampirkan. Terima kasih!`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${sellerWhatsApp}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Jalankan saat halaman load
+        window.addEventListener('load', function() {
+            initTheme();
+            initPage();
+        });
+    </script>
+</body>
+</html>
