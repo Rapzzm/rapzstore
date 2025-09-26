@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pembayaran - RapzStore</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(47, 0, 255, 0.671) 0%, rgba(162, 75, 140, 0.8) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 9px 19px rgba(0,0,0,0.1);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .summary-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .summary-label {
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .payment-info {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .payment-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2d3748;
+            text-align: center;
+        }
+
+        .payment-logo {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .payment-logo img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Ukuran khusus untuk QRIS: Lebih besar agar mudah discan */
+        .qris-logo {
+            width: 250px !important;
+            height: 250px !important;
+            max-width: 100%; /* Agar responsive di container kecil */
+        }
+
+        .payment-details {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #2d3748;
+            word-break: break-all;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #0a36fa 0%, #4ba276 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        /* CSS Variables for Theme (copy dari index.html) */
+        :root {
+            --bg-primary: #1a202c;
+            --bg-secondary: #2d3748;
+            --bg-card: #2d3748;
+            --text-primary: #f7fafc;
+            --text-secondary: #cbd5e0;
+            --border-color: #4a5568;
+            --shadow: rgba(0,0,0,0.3);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #2d3748;
+            --text-secondary: #718096;
+            --border-color: #e2e8f0;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .summary-card, .payment-info {
+            background: var(--bg-card);
+            border-color: var(--border-color);
+            box-shadow: 0 9px 12px var(--shadow);
+        }
+
+        .summary-title, .payment-title {
+            color: var(--text-primary);
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+        }
+
+        .summary-value, .payment-details {
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .summary-item {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+            
+            .payment-logo img {
+                width: 100px;
+                height: 100px;
+            }
+            
+            /* Ukuran QRIS di mobile: Masih besar tapi fit di layar */
+            .qris-logo {
+                width: 180px !important;
+                height: 180px !important;
+            }
+        }
+    </style>
+</head>
+<body data-theme="dark">
+    <header>
+        <a href="index.html" class="logo">← Kembali ke RapzStore</a>
+    </header>
+
+    <div class="container">
+        <div id="errorMessage" class="error-message"></div>
+
+        <div id="paymentContent" style="display: none;">
+            <div class="summary-card">
+                <h2 class="summary-title">Ringkasan Pesanan</h2>
+                <div class="summary-item">
+                    <span class="summary-label">Produk:</span>
+                    <span id="productName" class="summary-value"></span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Durasi:</span>
+                    <span id="duration" class="summary-value"></span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Harga:</span>
+                    <span id="price" class="summary-value"></span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Metode Pembayaran:</span>
+                    <span id="paymentMethod" class="summary-value"></span>
+                </div>
+            </div>
+
+            <div class="payment-info">
+                <h3 class="payment-title">Silakan Lakukan Transfer</h3>
+                <div class="payment-logo" id="paymentLogo"></div>
+                <div class="payment-details" id="paymentDetails"></div>
+                <p style="text-align: center; margin-top: 1rem; color: #4a5568; font-size: 0.9rem;">
+                    Setelah transfer, klik tombol di bawah untuk kirim bukti via WhatsApp.
+                </p>
+                <button class="upload-btn" onclick="sendProof()">Kirim Bukti Transfer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sellerWhatsApp = "6283854912766"; // Nomor WA penjual (sama seperti index.html)
+
+        // Data nomor pembayaran (ganti dengan nomor asli Anda)
+        const paymentDetails = {
+            QRIS: {
+                logo: '/bank/qris2.png', // Khusus QRIS: Gunakan qris2.png di payment.html (beda dari qris.png di index.html)
+                detail: 'Scan QRIS di atas dan transfer sesuai nominal pesanan.'
+            },
+            GoPay: {
+                logo: '/bank/gopay.png',
+                detail: 'GoPay: 081234567890 (Nama: Rapz Store)'
+            },
+            DANA: {
+                logo: '/bank/dana.png',
+                detail: 'DANA: 081234567890 (Nama: Rapz Store)'
+            },
+            ShopeePay: {
+                logo: '/bank/shopeepay.png',
+                detail: 'ShopeePay: 081234567890 (Nama: Rapz Store)'
+            },
+            SeaBank: {
+                logo: '/bank/seabank.png',
+                detail: 'SeaBank: 1234567890 (Nama: Rapz Store)'
+            }
+        };
+
+        // Parse query parameters dari URL
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                product: params.get('product') || '',
+                duration: params.get('duration') || '',
+                price: params.get('price') || '',
+                payment: params.get('payment') || ''
+            };
+        }
+
+        // Inisialisasi halaman
+        function initPage() {
+            const params = getQueryParams();
+            
+            if (!params.product || !params.duration || !params.price || !params.payment) {
+                document.getElementById('errorMessage').innerHTML = 'Data pesanan tidak lengkap. <a href="index.html">Kembali ke toko</a>.';
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            // Isi ringkasan
+            document.getElementById('productName').textContent = params.product;
+            document.getElementById('duration').textContent = params.duration;
+            document.getElementById('price').textContent = 'Rp ' + parseInt(params.price).toLocaleString('id-ID');
+            document.getElementById('paymentMethod').textContent = params.payment;
+
+            // Tampilkan info pembayaran
+            const payment = paymentDetails[params.payment];
+            if (payment) {
+                const logoDiv = document.getElementById('paymentLogo');
+                const logoPath = payment.logo;
+                const isQRIS = params.payment === 'QRIS';
+                const imgClass = isQRIS ? 'payment-logo-img qris-logo' : 'payment-logo-img';
+                
+                // Fallback SVG disesuaikan ukuran berdasarkan QRIS atau tidak
+                let fallbackSVG = '';
+                if (isQRIS) {
+                    fallbackSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlFSSVM8L3RleHQ+PC9zdmc+';
+                } else {
+                    fallbackSVG = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjY2NjIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxvZ288L3RleHQ+PC9zdmc+';
+                }
+                
+                logoDiv.innerHTML = `<img src="${logoPath}" alt="Logo ${params.payment}" class="${imgClass}" onerror="this.src='${fallbackSVG}'; this.alt='Logo Placeholder';">`;
+                
+                document.getElementById('paymentDetails').textContent = payment.detail;
+            } else {
+                document.getElementById('errorMessage').innerHTML = 'Metode pembayaran tidak valid.';
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('paymentContent').style.display = 'block';
+        }
+
+        // Fungsi kirim bukti via WA
+        function sendProof() {
+            const params = getQueryParams();
+            const message = `*KONFIRMASI TRANSFER*
+
+*Produk:* ${params.product}
+*Durasi:* ${params.duration}
+*Harga:* Rp ${parseInt(params.price).toLocaleString('id-ID')}
+*Metode Pembayaran:* ${params.payment}
+
+Saya sudah transfer ke ${params.payment}. Mohon cek bukti transfer yang saya lampirkan. Terima kasih!`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${sellerWhatsApp}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Inisialisasi theme (copy dari index.html untuk konsistensi)
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+        }
+
+        // Jalankan saat halaman load
+        window.addEventListener('load', function() {
+            initTheme();
+            initPage();
+        });
+    </script>
+</body>
+</html>
