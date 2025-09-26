@@ -660,7 +660,6 @@
                     <img src="Canva_(5).png" alt="Canva Pro" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">Canva Pro</h3>
-                        <p class="product-description">Akses premium Canva Pro apk editor profesional, tanpa watermark.</p>
                         <div class="product-price">Mulai dari Rp 99.000</div>
                         <button class="buy-btn" onclick="openModal('Canva Pro')">Beli Sekarang</button>
                     </div>
@@ -670,8 +669,6 @@
                     <img src="CC.png" alt="CapCut Pro" class="product-image" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                     <div class="product-info">
                         <h3 class="product-name">CapCut Pro</h3>
-                        <p class="product-description">Akses premium CapCut Pro editor video profesional, tanpa watermark.</p>
-                        
                        <div class="product-price">Mulai dari Rp 99.000</div>
                         <button class="buy-btn" onclick="openModal('CapCut Pro')">Beli Sekarang</button>
                     </div>
@@ -829,31 +826,31 @@
                 <div class="payment-options">
                     <button class="option-btn" onclick="selectPayment('QRIS')">
                         <div class="option-info">
-                            <span class="option-icon">📱</span>
+                            <img src="/bank/qris.png" alt="Logo QRIS" class="option-icon" style="width: 24px; height: 24px; vertical-align: middle;" />
                             <span>QRIS</span>
                         </div>
                     </button>
                     <button class="option-btn" onclick="selectPayment('GoPay')">
                         <div class="option-info">
-                            <span class="option-icon">💚</span>
+                            <img src="/bank/gopay.png" alt="Logo Gopay" class="option-icon" style="width: 24px; height: 24px; vertical-align: middle;" />
                             <span>GoPay</span>
                         </div>
                     </button>
                     <button class="option-btn" onclick="selectPayment('DANA')">
                         <div class="option-info">
-                            <span class="option-icon">💙</span>
+                            <img src="/bank/dana.png" alt="Logo Dana" class="option-icon" style="width: 24px; height: 24px; vertical-align: middle;" />
                             <span>DANA</span>
                         </div>
                     </button>
                     <button class="option-btn" onclick="selectPayment('ShopeePay')">
                         <div class="option-info">
-                            <span class="option-icon">🧡</span>
+                            <img src="/bank/shopeepay.png" alt="Logo Shopeepay" class="option-icon" style="width: 24px; height: 24px; vertical-align: middle;" />
                             <span>ShopeePay</span>
                         </div>
                     </button>
                     <button class="option-btn" onclick="selectPayment('SeaBank')">
                         <div class="option-info">
-                            <span class="option-icon">🏦</span>
+                            <img src="/bank/seabank.png" alt="Logo SeaBank" class="option-icon" style="width: 24px; height: 24px; vertical-align: middle;" />
                             <span>SeaBank</span>
                         </div>
                     </button>
@@ -1064,21 +1061,17 @@
             
             const selectedOption = productData[selectedProduct][selectedDuration];
             
-            const message = `*PESANAN BARU*
-
-*Produk:* ${selectedProduct}
-*Durasi:* ${selectedOption.duration}
-*Harga:* Rp ${selectedOption.price.toLocaleString('id-ID')}
-*Metode Pembayaran:* ${selectedPayment}
-
-Mohon konfirmasi Pesanan Saya Min, Kirim ${selectedPayment} ya saya mau transfer. ${selectedPayment}. Terima kasih!`;
-            
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappURL = `https://wa.me/${sellerWhatsApp}?text=${encodedMessage}`;
-            
-            window.open(whatsappURL, '_blank');
-            closeModal();
-            
+            const paymentParams = new URLSearchParams({
+        product: selectedProduct,
+        duration: selectedOption.duration,
+        price: selectedOption.price,
+        payment: selectedPayment
+    });
+    const paymentURL = `payment.html?${paymentParams.toString()}`;
+    
+    window.location.href = paymentURL; // Atau window.open(paymentURL, '_blank'); jika ingin buka tab baru
+    closeModal();
+    
             setTimeout(() => {
                 alert('Anda akan diarahkan ke WhatsApp untuk menyelesaikan pembelian!');
             }, 500);
@@ -1137,4 +1130,3 @@ Mohon konfirmasi Pesanan Saya Min, Kirim ${selectedPayment} ya saya mau transfer
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97cea0d4a184fe23',t:'MTc1NzUwNDE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
